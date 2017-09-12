@@ -1,7 +1,7 @@
-/*/*
- * driver.c
+/*
+ * latch.c
  *
- * Created: 04.09.2017 11:25:17
+ * Created: 11.09.2017 08:57:01
  *  Author: hubi
  */ 
 
@@ -37,7 +37,7 @@ void USART_transmitData(unsigned char data) {
 	UDR0 = data;
 }
 
-void printf(char* string){
+void printf(char* string) {
 	for (int i = 0; string[i] != '\0'; ++i){
 		USART_transmitData(string[i]);
 	}
@@ -49,14 +49,19 @@ void printf_int(int input){
 	USART_transmitData((unsigned char) (input%10) + '0');
 }
 
+void XMEM_Init(){
+	MCUCR |= 0x80; //Setting the SRE-Bit!? 
+}
+void init(){
+		USART_Init ( MYUBRR );
+		XMEM_Init();
+}
 int main(void) {
-	USART_Init ( MYUBRR );
-	int test = 348;
+	init();
+	volatile int* ptr= (int*) 0xFF;
+	DDRE = 0xFF;
+	PORTE = 2;
     while(1) {
-		printf("Hello World\n");
-        
-		USART_transmitData(USART_recieveData());
-		_delay_ms(250);
-		printf_int(test);
+		*ptr = 0xFF;
 	}
 }
