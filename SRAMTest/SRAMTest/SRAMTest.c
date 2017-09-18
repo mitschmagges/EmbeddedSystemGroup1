@@ -118,18 +118,22 @@ void SRAM_test(void) {
 
 int main(void) {
 	init();
-	//SRAM_test();
-	//printf_char("Hello world");
-	int* ptr_oled_cs = (int*) 0x17FF;
-	ptr_oled_cs[0] = 10;
+	SRAM_test();
+	
+	//int* ptr_oled_cs = (int*) 0x17FF;
+	//ptr_oled_cs[0] = 10;
 	while(1) {
-		//int* ptr_sram = (int*) 0x1801;
-		//*ptr_sram = 10;
-		//int* ptr_adc = (int*) 0x1401;
-		//*ptr_adc = 10;
-		//int* ptr_oled_dc = (int*) 0x1201;
-		//*ptr_oled_dc = 10;
-		//int* ptr_oled_cs = (int*) 0x1800;	
+		//int* ptr_oled_cs = (int*) 0x11FF;
 		//*ptr_oled_cs = 10;
+		//_delay_ms(1000);
+		//int* ptr_oled_dc = (int*) 0x1200;
+		//*ptr_oled_dc = 10;
+		//_delay_ms(1000);
+		int* ptr_adc = (int*) 0x1400;
+		*ptr_adc = 10;
+		//_delay_ms(1000);
+		//int* ptr_sram = (int*) 0x1800;
+		//*ptr_sram = 10;
+		//_delay_ms(1000);
 	}
 }
