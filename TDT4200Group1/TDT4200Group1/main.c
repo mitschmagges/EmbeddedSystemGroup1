@@ -31,8 +31,10 @@ void init() {
 int main(void) {
 	init();
 	oled_reset();
+	button_init();
 
 	while(1) {
+		
 		test_oled();
 	}
 }

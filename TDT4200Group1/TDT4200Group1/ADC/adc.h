@@ -20,10 +20,6 @@ struct Pos {
 	int posY;
 } pos;
 
-//Boolean
-#define boolean int
-#define true 1
-#define false 0
 
 enum DIRECTION{LEFT, RIGHT, UP, DOWN, NEUTRAL};
 	

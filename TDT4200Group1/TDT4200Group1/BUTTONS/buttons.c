@@ -9,7 +9,7 @@
 
 
 void button_init() {
-	PORTB = 0x01;
+	PORTB = 0x01<<2;
 	DDRB = 0x00;
 }
 

@@ -11,6 +11,12 @@
 
 #define F_CPU 4915200
 
+//Boolean
+#define boolean int
+#define true 1
+#define false 0
+
+
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,6 +25,7 @@
 #include "ADC/adc.h"
 #include "USART/usart.h"
 #include "OLED/oled.h"
+#include "BUTTONS/buttons.h"
 
 
 //ADDRESS-spaces
