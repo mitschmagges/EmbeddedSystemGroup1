@@ -41,6 +41,6 @@ int oled_putchar(unsigned char input);
 
 void oled_set_printmode(enum PRINTMODE);
 
-void test_oled();
+
 
 #endif /* OLED_H_ */

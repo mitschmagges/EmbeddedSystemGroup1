@@ -8,22 +8,22 @@
 #include "buttons.h"
 
 
-void button_init() {
+void buttons_init() {
 	PORTB = 0x01<<2;
 	DDRB = 0x00;
 }
 
-boolean isJoystickButtonPressed() {
+boolean buttons_isJoystickButtonPressed() {
 	short i = PINB;
 	return !(0x1 & (i>>2));
 }
 
-boolean isLeftButtonPressed() {
+boolean buttons_isLeftButtonPressed() {
 	short i = PINB;
 	return (0x1 & i);
 }
 
-boolean isRightButtonPressed() {
+boolean buttons_isRightButtonPressed() {
 	short i = PINB;
 	return (0x1 & (i>>1));
 }

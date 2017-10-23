@@ -35,9 +35,12 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../ADC \
 ../BUTTONS \
+../CAN \
+../MCP/ \
 ../OLED \
 ../OLED/FONTS \
 ../OLED/MENU \
+../SPI/ \
 ../USART
 
 
@@ -45,10 +48,14 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../ADC/adc.c \
 ../BUTTONS/buttons.c \
+../CAN/can.c \
+../CAN/can_buffer.c \
 ../main.c \
+../MCP/mcp.c \
 ../OLED/FONTS/fonts.c \
 ../OLED/MENU/menu.c \
 ../OLED/oled.c \
+../SPI/spi.c \
 ../USART/usart.c
 
 
@@ -61,37 +68,53 @@ ASM_SRCS +=
 OBJS +=  \
 ADC/adc.o \
 BUTTONS/buttons.o \
+CAN/can.o \
+CAN/can_buffer.o \
 main.o \
+MCP/mcp.o \
 OLED/FONTS/fonts.o \
 OLED/MENU/menu.o \
 OLED/oled.o \
+SPI/spi.o \
 USART/usart.o
 
 OBJS_AS_ARGS +=  \
 ADC/adc.o \
 BUTTONS/buttons.o \
+CAN/can.o \
+CAN/can_buffer.o \
 main.o \
+MCP/mcp.o \
 OLED/FONTS/fonts.o \
 OLED/MENU/menu.o \
 OLED/oled.o \
+SPI/spi.o \
 USART/usart.o
 
 C_DEPS +=  \
 ADC/adc.d \
 BUTTONS/buttons.d \
+CAN/can.d \
+CAN/can_buffer.d \
 main.d \
+MCP/mcp.d \
 OLED/FONTS/fonts.d \
 OLED/MENU/menu.d \
 OLED/oled.d \
+SPI/spi.d \
 USART/usart.d
 
 C_DEPS_AS_ARGS +=  \
 ADC/adc.d \
 BUTTONS/buttons.d \
+CAN/can.d \
+CAN/can_buffer.d \
 main.d \
+MCP/mcp.d \
 OLED/FONTS/fonts.d \
 OLED/MENU/menu.d \
 OLED/oled.d \
+SPI/spi.d \
 USART/usart.d
 
 OUTPUT_FILE_PATH +=TDT4200Group1.elf
@@ -123,6 +146,14 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
+
+
+
+
 ADC/%.o: ../ADC/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
@@ -137,7 +168,21 @@ BUTTONS/%.o: ../BUTTONS/%.c
 	@echo Finished building: $<
 	
 
+CAN/%.o: ../CAN/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./%.o: .././%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCP/%.o: ../MCP/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -159,6 +204,13 @@ OLED/MENU/%.o: ../OLED/MENU/%.c
 	
 
 OLED/%.o: ../OLED/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SPI/%.o: ../SPI/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

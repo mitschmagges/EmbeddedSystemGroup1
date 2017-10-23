@@ -15,6 +15,8 @@
 #define boolean int
 #define true 1
 #define false 0
+#define SET_BIT(reg, bit) (reg |= (1 << bit))
+#define CLEAR_BIT(reg, bit) (reg &= ~(1 << bit))
 
 
 #include <avr/io.h>
@@ -26,6 +28,8 @@
 #include "USART/usart.h"
 #include "OLED/oled.h"
 #include "BUTTONS/buttons.h"
+#include "CAN/can.h"
+#include "MCP/mcp.h"
 
 
 //ADDRESS-spaces

@@ -13,5 +13,8 @@
 
 void menu_mainMenu();
 int menu_getNewPointerPosition(int position, int menuLength);
-void menu_printMenu(char** options, int menuLength, int pointer);
+void menu_printMenu(const char** options, int menuLength, int pointer, const char* title);
+int menu_menuHandler(const char**options, const char* title, int menuLength);
+
+void menu_testMenu();
 #endif /* MENU_H_ */

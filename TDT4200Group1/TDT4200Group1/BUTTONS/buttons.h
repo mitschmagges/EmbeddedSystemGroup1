@@ -10,13 +10,13 @@
 
 #include "../main.h"
 
-void button_init();
+void buttons_init();
 
-boolean isJoystickButtonPressed();
+boolean buttons_isJoystickButtonPressed();
 
-boolean isLeftButtonPressed();
+boolean buttons_isLeftButtonPressed();
 
-boolean isRightButtonPressed();
+boolean buttons_isRightButtonPressed();
 
 
 

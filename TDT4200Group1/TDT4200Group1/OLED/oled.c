@@ -125,9 +125,6 @@ int oled_putchar(unsigned char input) {
 			oled_print_strip(0x00);
 		}
 		oled_goto_line(CURRENT_LINE);
-		usart_putchar('a');
-		usart_putchar('0' + CURRENT_LINE);
-		usart_putchar('\n');
 		CURRENT_COL=0;
 	}
 	usart_putchar(input);
@@ -142,6 +139,3 @@ void oled_set_printmode(enum PRINTMODE mode) {
 	printmode = mode;
 }
 
-void test_oled() {
-	menu_mainMenu();
-}

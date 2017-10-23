@@ -27,4 +27,6 @@ void printf_int(int input);
 
 void printf_hex(unsigned int input);
 
+void init_interrupts();
+void dummyPrint();
 #endif /* USART_H_ */

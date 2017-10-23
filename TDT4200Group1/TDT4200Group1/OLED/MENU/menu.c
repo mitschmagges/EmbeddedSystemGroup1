@@ -9,53 +9,30 @@
 
 
 void menu_play(){
-	oled_reset();
-	while(! isLeftButtonPressed()){
-	oled_goto_pos(0,0);
+
 	const int menuLength = 2;
-	char* options[2] = {"en", "mer"};
-	static int pointer=0;
-	printf("Play\n");
-	menu_printMenu(options, menuLength,pointer);
-	pointer = menu_getNewPointerPosition(pointer, menuLength);
-}
+	const char* options[2] = {"en", "mer"};
+	int pointer=menu_menuHandler(options, "Play", 2);
+
 	}
 
 void menu_options(){
-	oled_reset();
-	while(! isLeftButtonPressed()){
-	oled_goto_pos(0,0);
-	const int menuLength = 2;
-	char* options[2] = {"tull", "noe"};
-	static int pointer=0;
-	printf("Options\n");
-	menu_printMenu(options, menuLength,pointer);
-	pointer = menu_getNewPointerPosition(pointer, menuLength);
-	}
+	
+	const char* options[2] = {"tull", "noe"};
+	int pointer= menu_menuHandler(options, "Options", 2);
+	
+	
 	}
 
-void menu_mainMenu(){
-	//PRINT THE MENU
-	oled_reset();
-	while(! isLeftButtonPressed()){
-	oled_goto_pos(0,0);
-	printf("         MAIN MENU          \n");
+void menu_mainMenu(){	
 	void (*arr[3])(void)= { &menu_play, &menu_options, &menu_options};
-	const int menuLength = 3;
-	char* options[3] = {"ONE   ", "TWO   ", "THREE   "};
-	static int pointer = 0;
+	const char* options[3] = {"ONE   ", "TWO   ", "THREE   "};
+	int pointer = menu_menuHandler(options, "Main Menu", 3);
 	
-	menu_printMenu(options, menuLength, pointer);
-	
-	pointer = menu_getNewPointerPosition(pointer, menuLength);
-	
-	if (isJoystickButtonPressed()){
+	if(pointer >=0){
 		arr[pointer]();
 	}
 	
-	
-	
-	}
 	}
 
 int menu_getNewPointerPosition(int position, int menuLength){
@@ -94,8 +71,10 @@ int menu_getNewPointerPosition(int position, int menuLength){
 	last = direction;
 	return position;
 }
-void menu_printMenu(char** options, int menuLength, int pointer){
-	
+
+void menu_printMenu(const char** options, int menuLength, int pointer, const char* title){
+	oled_goto_pos(0,0);
+	printf("       %s\n", title);
 		for(int i = 0; i < menuLength; ++i){
 			if(i== pointer){
 				oled_set_printmode(INVERSE);
@@ -112,3 +91,32 @@ void menu_printMenu(char** options, int menuLength, int pointer){
 		}
 }
 
+int menu_menuHandler(const char**options,const  char* title, int menuLength){
+	oled_reset();
+	menu_printMenu(options, menuLength, 0, title);
+	while(buttons_isJoystickButtonPressed()); // Prevents double tapping on the joystick-button
+	int pointer =0;
+	while(1){
+	menu_printMenu(options, menuLength, pointer, title);
+	pointer = menu_getNewPointerPosition(pointer, menuLength);
+	if (buttons_isJoystickButtonPressed()){
+		return pointer;
+	}
+	
+	
+	
+	
+	if ( buttons_isJoystickButtonPressed()){
+		return pointer;
+	}
+	if (buttons_isLeftButtonPressed()){
+		return -1;
+	}
+	}
+	
+}
+
+
+void menu_testMenu(){
+	menu_mainMenu();
+}
